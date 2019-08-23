@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunstudio.dao.UserInfoDao">
+
+	<!-- 查询所有用户 -->
+	<select id="selectAllUsers" resultType="com.sunstudio.pojo.UserInfoPojo">
+		select * from user_info
+	</select>
+
+</mapper>
