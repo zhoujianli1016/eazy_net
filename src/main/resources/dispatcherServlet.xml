@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <!-- springMVC 扫描包 -->
+  <context:component-scan base-package="com.sunstudio.controller" />
+  
+  <!-- springMVC内容类型 -->
+  <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
+  
+  <mvc:view-resolvers>
+    <mvc:content-negotiation>
+      <mvc:default-views>
+        <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+      </mvc:default-views>
+    </mvc:content-negotiation>
+    <mvc:jsp prefix="/static/view" suffix=".jsp"/>
+    <mvc:freemarker prefix="/static/template" suffix=".ftl" cache-views="false" />
+  </mvc:view-resolvers>
+  
+  <mvc:resources mapping="/resources/**" location="/public, classpath:/static/" cache-period="31556926" />
+
+  <!-- 内容类型配置 -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	  <property name="mediaTypes">
+	    <value>
+	      json=application/json
+	      xml=application/xml
+	    </value>
+	  </property>
+	</bean>
+  
+  <!--  -->
+  <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="cookieName" value="clientlanguage"/>
+    <!-- in seconds. If set to -1, the cookie is not persisted (deleted when browser shuts down) -->
+    <property name="cookieMaxAge" value="100000"/>
+  </bean>
+  
+</beans>

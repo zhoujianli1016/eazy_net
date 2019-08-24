@@ -2,7 +2,7 @@ package com.sunstudio.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.sunstudio.pojo.UserInfoPojo;
 
@@ -10,7 +10,7 @@ import com.sunstudio.pojo.UserInfoPojo;
  * @author Lsatin
  * @date 2019年8月24日
  */
-@Component
+@Repository
 public interface UserInfoDao {
 
 	/**

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sunstudio.dao.UserInfoDao;
@@ -18,7 +17,7 @@ import com.sunstudio.service.UserInfoService;
 @Service(value = "userInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
 	
-	@Autowired
+	@Resource
 	private UserInfoDao userInfoDao;
 
 	public List<UserInfoPojo> queryAllUsers() {

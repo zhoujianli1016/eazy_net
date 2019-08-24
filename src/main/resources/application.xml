@@ -1,59 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        classpath:xsd/spring-beans.xsd
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        classpath:xsd/spring-context.xsd
+        https://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        classpath:xsd/spring-mvc.xsd
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/tx
-        classpath:xsd/spring-tx.xsd
+        https://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
-        classpath:xsd/spring-aop.xsd">
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<mvc:annotation-driven></mvc:annotation-driven>
-
-	<context:property-placeholder location="classpath:*.properties" ></context:property-placeholder>
-
-	<context:component-scan base-package="com.sunstudio.*" ></context:component-scan>
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="classpath:/mapper/userInfoMapper.xml" />
-	</bean>
-
-	<mvc:view-resolvers>
-		<mvc:content-negotiation>
-			<mvc:default-views>
-				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-			</mvc:default-views>
-		</mvc:content-negotiation>
-		<mvc:jsp />
-	</mvc:view-resolvers>
 	
-  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	  <property name="prefix" value="/static/view" />
-	  <property name="suffix" value=".jsp" />
-	  <property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />
+  <context:component-scan base-package="com.sunstudio.*"/>
+  <context:property-placeholder location="classpath:*.properties" />
+
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+    <property name="url" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+    <property name="driverClassName" value="${jdbc.driver}" />
+    <property name="maxActive" value="10" />
+    <property name="minIdle" value="5" />
+    <property name="logAbandoned" value="true" />
+  </bean>
+  
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  <property name="dataSource" ref="dataSource"/>
+	  <property name="typeAliasesPackage" value="com.sunstudio.pojo"/>
+	  <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="com.sunstudio.dao"/>
+	  <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
   </bean>
     
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
   </bean>
-    
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
-    <property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="maxActive" value="10" />
-		<property name="minIdle" value="5" />
-		<property name="logAbandoned" value="true" />
-	</bean>
     
   <tx:advice id="txAdvice" transaction-manager="transactionManager">
     <tx:attributes>

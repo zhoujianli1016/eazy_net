@@ -1,10 +1,10 @@
 package com.sunstudio.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,13 +21,17 @@ import com.sunstudio.service.UserInfoService;
 @RequestMapping(value = "/user")
 public class UserInfoController {
 
-	@Autowired
+	@Resource
 	private UserInfoService userInfoService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<UserInfoPojo> user(){
 		return userInfoService.queryAllUsers();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(UUID.randomUUID().toString());
 	}
 	
 }
