@@ -8,6 +8,8 @@
     │   ├── main                    
     │   │   ├── Java                // Java源码
     │   │   ├── resources           // 配置文件
+    │   │   │   ├── db              // 数据库文件
+    │   │   │   ├── doc             // 文档文件
     │   │   ├── webapp              // 静态资源
     │   ├── test                    // 
     │   │   ├── Java                // Java测试源码

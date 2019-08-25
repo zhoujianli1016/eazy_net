@@ -168,5 +168,19 @@
 	</dependencies>
 	<build>
 		<finalName>eazy_net</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.4.9.v20180320</version>
+				<configuration>
+			    <httpConnector>
+		        <port>8080</port>
+		        <host>localhost</host>
+			    </httpConnector>
+		      <scanIntervalSeconds>1</scanIntervalSeconds>
+			   </configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
