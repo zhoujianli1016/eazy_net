@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunstudio.dao.UserConfigDao">
+
+	<!-- 用户登录 -->
+	<select id="getUserByNameAndPassword" resultType="com.sunstudio.pojo.UserConfigPojo">
+		select t.name as name, t.password as password 
+		  from user_config t
+		<where>
+		  <if test="null != name">
+		    t.name = #{name}
+		  </if>
+		  <if test="null != password">
+        and t.password = #{password}
+      </if>
+		</where>
+	</select>
+
+</mapper>

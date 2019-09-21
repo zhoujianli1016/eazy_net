@@ -1,57 +1,30 @@
 package com.sunstudio.pojo;
 
-/**
- * 用户信息实体类
- * 
+/** 用户设置pojo
  * @author Lsatin
- * @date 2019年8月24日
+ * @date 2019年9月7日
  */
-public class UserInfoPojo {
-
+public class UserConfigPojo {
+	
 	/**
-	 * 主键ID
+	 * 主键id
 	 */
 	private String id;
 	
 	/**
-	 * 昵称
-	 */
-	private String nickName;
-	
-	/**
-	 * 名字
-	 */
-	private String firstName;
-	
-	/**
-	 * 姓氏
-	 */
-	private String lastName;
-	
-	/**
-	 * 姓名
+	 * 登录名
 	 */
 	private String name;
 	
 	/**
-	 * 性别
+	 * 登录密码
 	 */
-	private String sex;
+	private String password;
 	
 	/**
-	 * 邮箱
+	 * 用户信息主键id
 	 */
-	private String email;
-	
-	/**
-	 * 地址
-	 */
-	private String address;
-	
-	/**
-	 * 手机
-	 */
-	private String mobile;
+	private String userInfoId;
 	
 	/**
 	 * 是否删除
@@ -93,48 +66,6 @@ public class UserInfoPojo {
 	}
 
 	/**
-	 * @return the nickName
-	 */
-	public String getNickName() {
-		return nickName;
-	}
-
-	/**
-	 * @param nickName the nickName to set
-	 */
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -149,59 +80,31 @@ public class UserInfoPojo {
 	}
 
 	/**
-	 * @return the sex
+	 * @return the password
 	 */
-	public String getSex() {
-		return sex;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
-	 * @param sex the sex to set
+	 * @param password the password to set
 	 */
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
-	 * @return the email
+	 * @return the userInfoId
 	 */
-	public String getEmail() {
-		return email;
+	public String getUserInfoId() {
+		return userInfoId;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param userInfoId the userInfoId to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the mobile
-	 */
-	public String getMobile() {
-		return mobile;
-	}
-
-	/**
-	 * @param mobile the mobile to set
-	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setUserInfoId(String userInfoId) {
+		this.userInfoId = userInfoId;
 	}
 
 	/**
@@ -275,8 +178,7 @@ public class UserInfoPojo {
 	}
 
 	public String toString() {
-		return "UserInfoPojo [id=" + id + ", nickName=" + nickName + ", firstName=" + firstName + ", lastName=" + lastName
-		    + ", name=" + name + ", sex=" + sex + ", email=" + email + ", address=" + address + ", mobile=" + mobile
+		return "UserConfigPojo [id=" + id + ", name=" + name + ", password=" + password + ", userInfoId=" + userInfoId
 		    + ", isDelete=" + isDelete + ", createDate=" + createDate + ", createUser=" + createUser + ", modifyDate="
 		    + modifyDate + ", modifyUser=" + modifyUser + "]";
 	}
