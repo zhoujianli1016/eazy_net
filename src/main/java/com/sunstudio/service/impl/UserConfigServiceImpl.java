@@ -26,10 +26,10 @@ public class UserConfigServiceImpl implements UserConfigService {
 			} else if (pojo.getPassword().isEmpty()) {
 				return -2;
 			} else if (!pojo.getName().isEmpty() && !pojo.getPassword().isEmpty()) {
-				return 1;
+				return 0;
 			}
 		}
-		return 0;
+		return -3;
 	}
 
 	public int logOut(String name, String password) {
