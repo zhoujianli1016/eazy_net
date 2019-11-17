@@ -28,13 +28,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfoDao.selectUser(user);
 	}
 
-	public void register(UserInfoPojo user) {
-		userInfoDao.insertUsers(user);
-	}
-
 	public UserInfoPojo saveUser(UserInfoPojo user) {
 		if (user.getId().isEmpty()) {
-			return userInfoDao.selectUser(userInfoDao.insertUsers(user));
+			return null;
 		} else {
 			return userInfoDao.updateUser(user);
 		}

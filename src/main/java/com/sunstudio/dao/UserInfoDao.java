@@ -27,14 +27,6 @@ public interface UserInfoDao {
 	UserInfoPojo selectUser(UserInfoPojo user);
 	
 	/**
-	 * 增加单个用户
-	 * @param user 用户
-	 * @return 
-	 */
-	UserInfoPojo insertUsers(UserInfoPojo user);
-
-	
-	/**
 	 * 批量修改
 	 * @param userList 多个用户
 	 * @return
@@ -55,5 +47,12 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	void deleteUsers(List<UserInfoPojo> users);
+	
+	/**
+	 * 添加用户
+	 * @param user 用户信息
+	 * @return
+	 */
+	int insertUser(UserInfoPojo user);
 	
 }

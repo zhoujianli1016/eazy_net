@@ -58,6 +58,8 @@
   </tx:advice>
     
   <aop:config>
+    <aop:pointcut expression="execution(public * *(..))" id="executionTimeLoggerPointcut"/>
+    <aop:advisor advice-ref="executionTimeLoggerAOP" pointcut-ref="executionTimeLoggerPointcut"/>
     <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.sunstudio.service*.*(..))" />
   </aop:config>
 

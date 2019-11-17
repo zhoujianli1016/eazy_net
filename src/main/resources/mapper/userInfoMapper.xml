@@ -2,10 +2,95 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunstudio.dao.UserInfoDao">
-
+  <resultMap type="com.sunstudio.pojo.UserInfoPojo" id="userInfo">
+    <id column="id" property="id" />
+    <result column="nick_name" property="nickName" />
+    <result column="first_name" property="firstName" />
+    <result column="last_name" property="lastName" />
+    <result column="name" property="name" />
+    <result column="sex" property="sex" />
+    <result column="email" property="email" />
+    <result column="address" property="address" />
+    <result column="mobile" property="mobile" />
+    <result column="is_delete" property="isDelete" />
+    <result column="create_date" property="createDate" />
+    <result column="create_user" property="createUser" />
+    <result column="modify_date" property="modifyDate" />
+    <result column="modify_user" property="modifyUser" />
+  </resultMap>
+  
 	<!-- 查询所有用户 -->
 	<select id="selectAllUsers" resultType="com.sunstudio.pojo.UserInfoPojo">
 		select * from user_info
 	</select>
+	
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="com.sunstudio.pojo.UserInfoPojo" useGeneratedKeys="true">
+    <selectKey keyProperty="id" resultType="String" order="BEFORE" keyColumn="id" statementType="STATEMENT">
+      select replace(uuid(), '-', '') from dual
+    </selectKey>
+    insert into user_info(
+	      id, 
+      <if test="null != nickName">
+	      nick_name, 
+      </if>
+      <if test="null != firstName">
+	      first_name, 
+	    </if>
+	    <if test="null != lastName">
+	      last_ame, 
+	    </if>
+	    <if test="null != name">
+	      name, 
+	    </if>
+	    <if test="null != sex">
+	      sex, 
+	    </if>
+	    <if test="null != email">
+	      email, 
+	    </if>
+	    <if test="null != address">
+	      address, 
+      </if>
+      <if test="null != mobile">
+	      mobile, 
+	    </if>
+	      is_delete, 
+	      create_date, 
+	      create_user, 
+	      modify_date, 
+	      modify_user)
+    values(
+        #{id}, 
+      <if test="null != nickName">
+        #{nickName}, 
+      </if>
+      <if test="null != firstName">
+        #{firstName}, 
+      </if>
+      <if test="null != lastName">
+        #{lastName}, 
+      </if>
+      <if test="null != name">
+        #{name}, 
+      </if>
+      <if test="null != sex">
+        #{sex}, 
+      </if>
+      <if test="null != email">
+        #{email}, 
+      </if>
+      <if test="null != address">
+        #{address}, 
+      </if>
+      <if test="null != mobile">
+        #{mobile}, 
+      </if>
+        0, 
+        NOW(), 
+        'ADMIN', 
+        NOW(), 
+        'ADMIN')
+	</insert>
 
 </mapper>

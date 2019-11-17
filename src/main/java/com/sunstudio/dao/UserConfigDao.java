@@ -14,11 +14,18 @@ import com.sunstudio.pojo.UserConfigPojo;
 public interface UserConfigDao {
 
 	/**
-	 * 获取用户根据登录名和登录密码<br/>
+	 * 查询用户根据登录名和登录密码<br/>
 	 * @param name 登录名
 	 * @param password 登录密码
 	 * @return
 	 */
-	UserConfigPojo getUserByNameAndPassword(@Param("name")String name, @Param("password")String password);
+	UserConfigPojo selectByNameAndPassword(@Param("name")String name, @Param("password")String password);
+	
+	/**
+	 * 添加用户
+	 * @param pojo 用户设置
+	 * @return
+	 */
+	int insertUser(UserConfigPojo pojo);
 	
 }

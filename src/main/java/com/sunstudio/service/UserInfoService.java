@@ -24,12 +24,6 @@ public interface UserInfoService {
 	UserInfoPojo queryUserInfo(UserInfoPojo user);
 	
 	/**
-	 * 注册用户
-	 * @param user
-	 */
-	void register(UserInfoPojo user);
-	
-	/**
 	 * 保存用户
 	 * @return
 	 */

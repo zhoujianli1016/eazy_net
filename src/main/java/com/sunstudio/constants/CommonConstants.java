@@ -16,4 +16,9 @@ public class CommonConstants {
 	 */
 	public static String IS_DELETE_NO = "0";
 	
+	/**
+	 * 系统管理员
+	 */
+	public static String SYS_ADMINISTRATOR = "admin";
+	
 }
