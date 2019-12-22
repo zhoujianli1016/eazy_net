@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /** restful响应pojo
  * @author Lsatin 2019年11月2日
- * @param <T>
- *
  */
 public class RestResponsePojo<T> implements Serializable{
 

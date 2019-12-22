@@ -7,18 +7,28 @@ package com.sunstudio.constants;
 public class CommonConstants {
 
 	/**
-	 * 业务删除/是
+	 * 业务删除-是
 	 */
-	public static String IS_DELETE_YES = "1";
+	public static final String IS_DELETE_YES = "1";
 	
 	/**
-	 * 业务删除/否
+	 * 业务删除-否
 	 */
-	public static String IS_DELETE_NO = "0";
+	public static final String IS_DELETE_NO = "0";
 	
 	/**
 	 * 系统管理员
 	 */
-	public static String SYS_ADMINISTRATOR = "admin";
+	public static final String SYS_ADMINISTRATOR = "admin";
+	
+	/**
+	 * 会话-用户名
+	 */
+	public static final String SESSION_USER_KEY = "userName";
+	
+	/**
+	 * 会话-请求地址
+	 */
+	public static final String SESSION_URI_KEY = "beforeUri";
 	
 }

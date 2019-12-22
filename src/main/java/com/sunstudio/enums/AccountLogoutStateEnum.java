@@ -28,12 +28,12 @@ public enum AccountLogoutStateEnum {
 	/**
 	 * 代码
 	 */
-	private int code;
+	private final int code;
 	
 	/**
 	 * 标签
 	 */
-	private String label;
+	private final String label;
 	
 	/**
 	 * 地址
@@ -48,24 +48,10 @@ public enum AccountLogoutStateEnum {
 	}
 
 	/**
-	 * @param code the code to set
-	 */
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	/**
 	 * @return the label
 	 */
 	public String getLabel() {
 		return label;
-	}
-
-	/**
-	 * @param label the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
 	}
 
 	/**

@@ -86,4 +86,7 @@
   
   <%@include file="/static/view/common/footer.jsp"%>
 </body>
+<script type="text/javascript">
+  feather.replace();
+</script>
 </html>

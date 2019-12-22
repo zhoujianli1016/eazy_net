@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-  String path = request.getContextPath();
-  String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path +"/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
 	  <%@include file="/static/view/common/head.jsp" %>
-	  <link href="${basePath}/static/css/floating-labels.css" rel="stylesheet" type="text/css">
-	  <script type="text/javascript" src="${basePath}/static/js/jquery.md5.js"></script>
+	  <link href="<%=basePath %>/static/css/floating-labels.css" rel="stylesheet" type="text/css">
+	  <script type="text/javascript" src="<%=basePath %>/static/js/jquery.md5.js"></script>
 	  <title>登入</title>
   </head>
 <body>
-  <form class="form-signin" action="/user/in" method="post" id="loginForm">
+  <form class="form-signin" action="/login/in" method="post" id="loginForm">
 	  <div class="text-center mb-4">
       <i class="fas fa-user-circle fa-5x" aria-hidden="true"></i>
 	    <h1 class="h3 mb-3 font-weight-normal">eazy-net</h1>
@@ -86,7 +82,7 @@
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+	        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button> -->
 	        <!-- <button type="button" class="btn btn-primary">注册用户</button> -->
 	      </div>
 	    </div>
@@ -105,5 +101,8 @@
       $(this).val($.md5($(this).val()));
     });
 	});
+</script>
+<script type="text/javascript">
+  feather.replace();
 </script>
 </html>

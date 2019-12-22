@@ -8,14 +8,27 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
   <mvc:annotation-driven />
+  
   <!-- springMVC 扫描包 -->
   <context:component-scan base-package="com.sunstudio.controller" />
+  <mvc:resources location="/static/css/" mapping="/static/css/**" />
+  <mvc:resources location="/static/js/" mapping="/static/js/**" />
+  <mvc:resources location="/static/dist/" mapping="/static/dist/**" />
   
   <!-- springMVC内容类型 -->
   <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
-  <mvc:default-servlet-handler/>
-  <mvc:resources mapping="/css/**" location="/static/css/"/>
-  <mvc:resources mapping="/js/**" location="/static/js/"/>
+  
+  <!-- springMVC登录拦截器 -->
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**"/>
+      <mvc:exclude-mapping path="/"/>
+      <mvc:exclude-mapping path="/static/css/**"/>
+      <mvc:exclude-mapping path="/static/js/**"/>
+      <mvc:exclude-mapping path="/static/dist/**"/>
+      <bean class="com.sunstudio.interceptor.LoginInterceptor"></bean>
+    </mvc:interceptor>
+  </mvc:interceptors>
   
   <mvc:view-resolvers>
     <mvc:content-negotiation>

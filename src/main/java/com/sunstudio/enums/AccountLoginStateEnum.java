@@ -8,32 +8,32 @@ public enum AccountLoginStateEnum {
 	/**
 	 * 系统异常
 	 */
-	ERROR(103, "系统异常", "user/login"),
+	ERROR(103, "系统异常", "/login"),
 	
 	/**
 	 * 登入成功
 	 */
-	SUCCESSFUL(101, "登入成功", "user/login"),
+	SUCCESSFUL(101, "登入成功", "/login"),
 	
 	/**
 	 * 密码错误
 	 */
-	WARNING(102, "密码错误", "user/login"),
+	WARNING(102, "密码错误", "/login"),
 	
 	/**
 	 * 不存在用户
 	 */
-	WRONG(100, "账户不存在", "user/login");
+	WRONG(100, "账户不存在", "/login");
 	
 	/**
 	 * 代码
 	 */
-	private int code;
+	private final int code;
 	
 	/**
 	 * 标签
 	 */
-	private String label;
+	private final String label;
 	
 	/**
 	 * 地址
@@ -54,24 +54,10 @@ public enum AccountLoginStateEnum {
 	}
 
 	/**
-	 * @param code the code to set
-	 */
-	public void setCode(int code) {
-		this.code = code;
-	}
-
-	/**
 	 * @return the label
 	 */
 	public String getLabel() {
 		return label;
-	}
-
-	/**
-	 * @param label the label to set
-	 */
-	public void setLabel(String label) {
-		this.label = label;
 	}
 
 	/**

@@ -24,5 +24,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(e, errorMessage, headers, HttpStatus.OK, request);
 	}
 	
-	
 }
