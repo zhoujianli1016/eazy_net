@@ -24,8 +24,10 @@ DROP TABLE IF EXISTS `user_info`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '名称',
-  `nick_name` varchar(45) COLLATE utf8_estonian_ci DEFAULT NULL,
+  `username` varchar(45) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '名称',
+  `nickname` varchar(45) COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '昵称',
+  `first_name` varchar(45) COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '名字',
+  `last_name` varchar(45) COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '姓氏',
   `sex` int(1) DEFAULT NULL COMMENT '性别',
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '邮箱',
   `address` varchar(50) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '地址',
@@ -34,6 +36,7 @@ CREATE TABLE `user_info` (
   `create_user` varchar(20) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '创建人',
   `modify_date` datetime DEFAULT NULL COMMENT '修改时间',
   `modify_user` varchar(20) CHARACTER SET utf8 COLLATE utf8_estonian_ci DEFAULT NULL COMMENT '修改人',
+  `delete` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`),
   KEY `MOBILE_INDEX` (`phone`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci ROW_FORMAT=DYNAMIC;
@@ -45,7 +48,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'admin','系统管理员',0,NULL,NULL,NULL,'2021-02-20 13:48:16',NULL,'2021-02-20 13:48:16',NULL);
+INSERT INTO `user_info` VALUES (1,'admin','系统管理员',NULL,NULL,0,NULL,NULL,NULL,'2021-02-20 13:48:16',NULL,'2021-02-20 13:48:16',NULL,_binary '\0');
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-20 13:50:40
+-- Dump completed on 2021-02-20 14:18:17
