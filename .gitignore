@@ -1,0 +1,13 @@
+/logs/
+/target/
+/target-eclipse/
+/d:/
+.slcache
+*.iml
+/classes/
+.idea
+
+# eclipse
+.classpath
+.settings
+.project
