@@ -2,95 +2,186 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunstudio.dao.UserInfoDao">
-  <resultMap type="com.sunstudio.pojo.UserInfoPojo" id="userInfo">
-    <id column="id" property="id" />
-    <result column="nick_name" property="nickName" />
+
+  <resultMap type="com.sunstudio.pojo.UserInfoPojo" id="user_info" extends="com.sunstudio.basic.dao.BasicDao.record_result_map">
     <result column="first_name" property="firstName" />
     <result column="last_name" property="lastName" />
-    <result column="name" property="name" />
+    <result column="username" property="username" />
+    <result column="nickname" property="nickname" />
     <result column="sex" property="sex" />
     <result column="email" property="email" />
     <result column="address" property="address" />
-    <result column="mobile" property="mobile" />
-    <result column="is_delete" property="isDelete" />
-    <result column="create_date" property="createDate" />
-    <result column="create_user" property="createUser" />
-    <result column="modify_date" property="modifyDate" />
-    <result column="modify_user" property="modifyUser" />
+    <result column="phone" property="phone" />
   </resultMap>
   
-	<!-- 查询所有用户 -->
-	<select id="selectAllUsers" resultType="com.sunstudio.pojo.UserInfoPojo">
-		select * from user_info
+  <sql id="basic_column">
+    <include refid="com.sunstudio.basic.dao.BasicDao.primary_key_column" />
+    , first_name as firstName, last_name as lastName, 
+    username, nickname, sex, email, address, phone, 
+    <include refid="com.sunstudio.basic.dao.BasicDao.recourd_column" />
+  </sql>
+  
+  <sql id="basic_table">t_user_info</sql>
+  
+  <select id="count" resultMap="user_info" parameterType="java.lang.String">
+    SELECT 
+     COUNT(1)
+      FROM 
+    <include refid="basic_table" />
+     WHERE username = #{username} 
+  </select>
+  
+	<select id="select" resultMap="user_info" parameterType="com.sunstudio.pojo.UserInfoPojo">
+		SELECT 
+    <include refid="basic_column" />
+      FROM 
+    <include refid="basic_table" /> 
+	   <trim prefix="WHERE" prefixOverrides="AND">
+	     <if test="firstName != null"> first_name = #{firstName} </if>
+	     <if test="lastName != null"> last_name = #{lastName} </if>
+	     <if test="username != null"> username = #{username} </if>
+	     <if test="nickname != null"> nickname = #{nickname} </if>
+	     <if test="sex != null"> sex = #{sex} </if>
+	     <if test="email != null"> email = #{email} </if>
+	     <if test="address != null"> address = #{address} </if>
+	     <if test="phone != null"> phone = #{phone} </if>
+	     <if test="valid != null"> valid = #{valid} </if>
+     </trim>
 	</select>
 	
-	<!-- 添加用户 -->
-	<insert id="insertUser" parameterType="com.sunstudio.pojo.UserInfoPojo" useGeneratedKeys="true">
-    <selectKey keyProperty="id" resultType="String" order="BEFORE" keyColumn="id" statementType="STATEMENT">
-      select replace(uuid(), '-', '') from dual
-    </selectKey>
-    insert into user_info(
-	      id, 
-      <if test="null != nickName">
-	      nick_name, 
-      </if>
-      <if test="null != firstName">
-	      first_name, 
-	    </if>
-	    <if test="null != lastName">
-	      last_ame, 
-	    </if>
-	    <if test="null != name">
-	      name, 
-	    </if>
-	    <if test="null != sex">
-	      sex, 
-	    </if>
-	    <if test="null != email">
-	      email, 
-	    </if>
-	    <if test="null != address">
-	      address, 
-      </if>
-      <if test="null != mobile">
-	      mobile, 
-	    </if>
-	      is_delete, 
-	      create_date, 
-	      create_user, 
-	      modify_date, 
-	      modify_user)
-    values(
-        #{id}, 
-      <if test="null != nickName">
-        #{nickName}, 
-      </if>
-      <if test="null != firstName">
-        #{firstName}, 
-      </if>
-      <if test="null != lastName">
-        #{lastName}, 
-      </if>
-      <if test="null != name">
-        #{name}, 
-      </if>
-      <if test="null != sex">
-        #{sex}, 
-      </if>
-      <if test="null != email">
-        #{email}, 
-      </if>
-      <if test="null != address">
-        #{address}, 
-      </if>
-      <if test="null != mobile">
-        #{mobile}, 
-      </if>
-        0, 
-        NOW(), 
-        'ADMIN', 
-        NOW(), 
-        'ADMIN')
+	<select id="selects" resultMap="user_info" parameterType="java.lang.Object">
+    SELECT 
+    <include refid="basic_column" />
+      FROM
+    <include refid="basic_table" />
+     WHERE username
+    <foreach collection="params" item="e" index="index" open="IN (" close=")" separator=",">
+      #{e}
+    </foreach>
+	</select>
+	
+	<select id="selectByPrimaryKey" resultMap="user_info" parameterType="java.lang.Long">
+    SELECT
+    <include refid="basic_column" />
+    FROM 
+    <include refid="basic_table" /> 
+    WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="com.sunstudio.pojo.UserInfoPojo">
+    UPDATE 
+    <include refid="basic_table" /> 
+    <trim prefix="SET" suffixOverrides=",">
+      created_date = UNIX_TIMESTAMP(),
+      <if test="firstName != null"> first_name = #{firstName}, </if>
+      <if test="lastName != null"> last_name = #{lastName}, </if>
+      <if test="username != null"> username = #{username}, </if>
+      <if test="nickname != null"> nickname = #{nickname}, </if>
+      <if test="sex != null"> sex = #{sex}, </if>
+      <if test="email != null"> email = #{email}, </if>
+      <if test="address != null"> address = #{address}, </if>
+      <if test="phone != null"> phone = #{phone}, </if>
+      <if test="valid != null"> valid = #{valid} </if>
+    </trim>
+    WHERE id = #{id}
+	</update>
+	
+	<insert id="insert" parameterType="com.sunstudio.pojo.UserInfoPojo" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO 
+    <include refid="basic_table" /> 
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      created_date, 
+	    <if test="createdUser != null"> created_user, </if>
+	    modifyed_date, 
+	    <if test="modifyedUser != null"> modifyed_user, </if>
+      <if test="firstName != null"> first_name, </if>
+      <if test="lastName != null"> last_name, </if>
+	    <if test="username != null"> username, </if>
+      <if test="nickname != null"> nickname, </if>
+      <if test="sex != null"> sex, </if>
+      <if test="email != null"> email, </if>
+      <if test="address != null"> address, </if>
+      <if test="phone != null"> phone, </if>
+      <if test="valid != null"> valid </if>
+    </trim>
+    <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+      UNIX_TIMESTAMP(), 
+      <if test="createdUser != null"> #{createdUser}, </if>
+      UNIX_TIMESTAMP(), 
+      <if test="modifyedUser != null"> #{modifyedUser}, </if>
+      <if test="firstName != null"> #{firstName}, </if>
+      <if test="lastName != null"> #{lastName}, </if>
+      <if test="username != null"> #{username}, </if>
+      <if test="nickname != null"> #{nickname}, </if>
+      <if test="sex != null"> #{sex}, </if>
+      <if test="email != null"> #{email}, </if>
+      <if test="address != null"> #{address}, </if>
+      <if test="phone != null"> #{phone}, </if>
+      <if test="valid != null"> #{valid} </if>
+    </trim>
 	</insert>
+	
+	<insert id="inserts" parameterType="com.sunstudio.pojo.UserInfoPojo" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO 
+    <include refid="basic_table" />
+	    (created_date, 
+	    created_user, 
+	    modifyed_date, 
+	    modifyed_user, 
+	    first_name, 
+	    last_name, 
+	    username, 
+	    nickname, 
+	    sex, 
+	    email, 
+	    address, 
+	    phone, 
+      valid)
+    VALUES
+    <foreach collection="params" index="index" item="e" separator=",">
+      (
+	      UNIX_TIMESTAMP(), 
+	      #{e.createdUser}, 
+	      UNIX_TIMESTAMP(), 
+	      #{e.modifyedUser}, 
+	      #{e.firstName}, 
+	      #{e.lastName}, 
+	      #{e.username}, 
+	      #{e.nickname}, 
+	      #{e.sex}, 
+	      #{e.email}, 
+	      #{e.address}, 
+	      #{e.phone}, 
+	      <choose>
+          <when test="e.valid != null">
+            #{e.valid}
+          </when>
+          <otherwise>1</otherwise>
+        </choose>
+      )
+    </foreach>
+	</insert>
+	
+	<delete id="delete" parameterType="com.sunstudio.pojo.UserInfoPojo">
+    DELETE FROM
+    <include refid="basic_table" /> 
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <if test="firstName != null"> first_name = #{firstName}, </if>
+      <if test="lastName != null"> last_name = #{lastName}, </if>
+      <if test="username != null"> username = #{username}, </if>
+      <if test="nickname != null"> nickname = #{nickname}, </if>
+      <if test="sex != null"> sex = #{sex}, </if>
+      <if test="email != null"> email = #{email}, </if>
+      <if test="address != null"> address = #{address}, </if>
+      <if test="phone != null"> phone = #{phone}, </if>
+      <if test="valid != null"> valid = #{valid} </if>
+    </trim>
+	</delete>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    DELETE FROM
+    <include refid="basic_table" /> 
+    WHERE id = #{id}
+	</delete>
 
 </mapper>

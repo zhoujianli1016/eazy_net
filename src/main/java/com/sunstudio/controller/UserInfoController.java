@@ -1,13 +1,11 @@
 package com.sunstudio.controller;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sunstudio.pojo.RegistPojo;
-import com.sunstudio.service.UserConfigService;
+import com.sunstudio.basic.controller.AbstractController;
+import com.sunstudio.pojo.UserInfoPojo;
 import com.sunstudio.service.UserInfoService;
 
 /** 用户信息控制层
@@ -15,17 +13,22 @@ import com.sunstudio.service.UserInfoService;
  */
 @ControllerAdvice
 @RequestMapping(value = "/user")
-public class UserInfoController {
+public class UserInfoController extends AbstractController<UserInfoPojo, UserInfoService<UserInfoPojo>> {
 
-	@Resource
-	private UserInfoService userInfoService;
+	private UserInfoService<UserInfoPojo> userInfoService;
 	
-	@Resource
-	private UserConfigService userConfigService;
+	@Override
+	protected UserInfoService<UserInfoPojo> getService() {
+		return userInfoService;
+	}
 	
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String register(RegistPojo pojo) {
-		return userConfigService.register(pojo);
+	@Autowired
+	@Override
+	protected void setService(UserInfoService<UserInfoPojo> service) {
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("{} 注入service：{}", getClass().getTypeName(), service.getClass().getTypeName());
+		}
+		this.userInfoService = service;
 	}
 	
 }

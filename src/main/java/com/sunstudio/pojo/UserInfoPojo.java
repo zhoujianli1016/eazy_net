@@ -1,109 +1,65 @@
 package com.sunstudio.pojo;
 
+import com.sunstudio.basic.pojo.RecordAbstractPojo;
+
 /**
- * 用户信息实体类
+ * 实体类：用户信息
  * 
  * @author Lsatin
  * @date 2019年8月24日
  */
-public class UserInfoPojo {
+public class UserInfoPojo extends RecordAbstractPojo<Long> {
 
-	/**
-	 * 主键ID
-	 */
-	private String id;
-	
-	/**
-	 * 昵称
-	 */
-	private String nickName;
-	
-	/**
-	 * 名字
-	 */
+	/** 用户名 */
+	private String username;
+
+	/** 昵称 */
+	private String nickname;
+
+	/** 名字 */
 	private String firstName;
-	
-	/**
-	 * 姓氏
-	 */
+
+	/** 姓氏 */
 	private String lastName;
-	
-	/**
-	 * 姓名
-	 */
-	private String name;
-	
-	/**
-	 * 性别
-	 */
-	private String sex;
-	
-	/**
-	 * 邮箱
-	 */
+
+	/** 性别 */
+	private Integer sex;
+
+	/** 邮箱 */
 	private String email;
-	
-	/**
-	 * 地址
-	 */
+
+	/** 地址 */
 	private String address;
-	
-	/**
-	 * 手机
-	 */
-	private String mobile;
-	
-	/**
-	 * 是否删除
-	 */
-	private String isDelete;
-	
-	/**
-	 * 创建日期
-	 */
-	private String createDate;
-	
-	/**
-	 * 创建人
-	 */
-	private String createUser;
-	
-	/**
-	 * 修改日期
-	 */
-	private String modifyDate;
-	
-	/**
-	 * 修改人
-	 */
-	private String modifyUser;
+
+	/** 手机 */
+	private String phone;
 
 	/**
-	 * @return the id
+	 * @return the username
 	 */
-	public String getId() {
-		return id;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param username the username to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
-	 * @return the nickName
+	 * @return the nickname
 	 */
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
 	/**
-	 * @param nickName the nickName to set
+	 * @param nickname the nickname to set
 	 */
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	/**
@@ -135,30 +91,16 @@ public class UserInfoPojo {
 	}
 
 	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
 	 * @return the sex
 	 */
-	public String getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
 	/**
 	 * @param sex the sex to set
 	 */
-	public void setSex(String sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
@@ -191,94 +133,36 @@ public class UserInfoPojo {
 	}
 
 	/**
-	 * @return the mobile
+	 * @return the phone
 	 */
-	public String getMobile() {
-		return mobile;
+	public String getPhone() {
+		return phone;
 	}
 
 	/**
-	 * @param mobile the mobile to set
+	 * @param phone the phone to set
 	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	/**
-	 * @return the isDelete
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
-	public String getIsDelete() {
-		return isDelete;
-	}
-
-	/**
-	 * @param isDelete the isDelete to set
-	 */
-	public void setIsDelete(String isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	/**
-	 * @return the createDate
-	 */
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	/**
-	 * @param createDate the createDate to set
-	 */
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
-	/**
-	 * @return the createUser
-	 */
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	/**
-	 * @param createUser the createUser to set
-	 */
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	/**
-	 * @return the modifyDate
-	 */
-	public String getModifyDate() {
-		return modifyDate;
-	}
-
-	/**
-	 * @param modifyDate the modifyDate to set
-	 */
-	public void setModifyDate(String modifyDate) {
-		this.modifyDate = modifyDate;
-	}
-
-	/**
-	 * @return the modifyUser
-	 */
-	public String getModifyUser() {
-		return modifyUser;
-	}
-
-	/**
-	 * @param modifyUser the modifyUser to set
-	 */
-	public void setModifyUser(String modifyUser) {
-		this.modifyUser = modifyUser;
-	}
-
+	@Override
 	public String toString() {
-		return "UserInfoPojo [id=" + id + ", nickName=" + nickName + ", firstName=" + firstName + ", lastName=" + lastName
-		    + ", name=" + name + ", sex=" + sex + ", email=" + email + ", address=" + address + ", mobile=" + mobile
-		    + ", isDelete=" + isDelete + ", createDate=" + createDate + ", createUser=" + createUser + ", modifyDate="
-		    + modifyDate + ", modifyUser=" + modifyUser + "]";
+		return "UserInfoPojo [username=" + username + ", nickname=" + nickname + ", firstName=" + firstName + ", lastName=" + lastName + ", sex=" + sex + ", email=" + email + ", address=" + address + ", phone=" + phone + super.toString();
+	}
+
+	/**
+	 * @param username
+	 */
+	public UserInfoPojo(String username) {
+		super();
+		this.username = username;
 	}
 	
+	public UserInfoPojo() {
+	}
+
 }

@@ -24,7 +24,7 @@ public class CommonConstants {
 	/**
 	 * 会话-用户名
 	 */
-	public static final String SESSION_USER_KEY = "userName";
+	public static final String SESSION_USER_KEY = "username";
 	
 	/**
 	 * 会话-请求地址

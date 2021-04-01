@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunstudio.basic.dao.BasicDao">
+
+  <resultMap type="com.sunstudio.basic.pojo.RecordAbstractPojo" id="record_result_map">
+    <result column="created_date" property="createdDate" />
+    <result column="created_user" property="createdUser" />
+    <result column="modifyed_date" property="modifyedDate" />
+    <result column="modifyed_user" property="modifyedUser" />
+    <result column="valid" property="valid" />
+  </resultMap>
+  
+  <sql id="primary_key_column">
+    id
+  </sql>
+  
+  <sql id="recourd_column">
+    created_date, created_user, modifyed_date, modifyed_user, valid
+  </sql>
+
+</mapper>
