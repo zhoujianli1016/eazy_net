@@ -15,7 +15,7 @@ CREATE TABLE `t_user_info` (
   `address` varchar(45) DEFAULT NULL COMMENT '地址',
   `phone` varchar(45) DEFAULT NULL COMMENT '手机号',
   `valid` bit(1) NOT NULL DEFAULT b'1' COMMENT '有效性：0无效、1有效',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
   KEY `created_date_index` (`created_date`) USING BTREE,
   KEY `modifyed_date_index` (`modifyed_date`) USING BTREE,
   KEY `sex_index` (`sex`) USING BTREE
