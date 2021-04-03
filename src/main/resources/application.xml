@@ -14,9 +14,13 @@
         http://www.springframework.org/schema/aop
         https://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
+  <!-- spring 上下午扫描包 -->
   <context:component-scan base-package="com.sunstudio.*"/>
+  
+  <!-- spring 上下文加载配置文件 -->
   <context:property-placeholder location="classpath:jdbc.properties" />
 
+  <!-- 数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
     <property name="url" value="${jdbc.url}" />
     <property name="username" value="${jdbc.username}" />
@@ -27,6 +31,7 @@
     <property name="logAbandoned" value="true" />
   </bean>
   
+  <!-- mybatis 连接 -->
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  <property name="dataSource" ref="dataSource"/>
 	  <property name="typeAliasesPackage" value="com.sunstudio.pojo"/>
@@ -34,15 +39,18 @@
 	  <property name="mapperLocations" value="classpath:mapper/*.xml"/>
 	</bean>
 	
+	<!-- mybatis 配置 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 	  <property name="basePackage" value="com.sunstudio.dao"/>
 	  <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
   </bean>
     
+  <!-- 数据库事务 -->
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     <property name="dataSource" ref="dataSource" />
   </bean>
     
+  <!-- 事务通知 -->
   <tx:advice id="txAdvice" transaction-manager="transactionManager">
     <tx:attributes>
 		<tx:method name="save*" propagation="REQUIRED" />
@@ -56,11 +64,11 @@
 		<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
     </tx:attributes>
   </tx:advice>
-    
+  
+  <!-- 切入点 -->
   <aop:config>
-    <aop:pointcut expression="execution(public * *(..))" id="executionTimeLoggerPointcut"/>
-    <aop:advisor advice-ref="executionTimeLoggerAOP" pointcut-ref="executionTimeLoggerPointcut"/>
-    <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.sunstudio.service*.*(..))" />
+    <aop:advisor advice-ref="executionTimeLoggerAOP" pointcut="execution(* com.sunstudio..*.*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.sunstudio.service.*.*(..))" />
   </aop:config>
 
 </beans>

@@ -7,10 +7,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
+  <!-- 启动注解功能 -->
   <mvc:annotation-driven />
   
-  <!-- springMVC 扫描包 -->
-  <context:component-scan base-package="com.sunstudio.controller" />
+  <context:component-scan base-package="com.sunstudio.controller"/>
+  
+  <!-- 过滤静态资源 -->
   <mvc:resources location="/static/css/" mapping="/static/css/**" />
   <mvc:resources location="/static/js/" mapping="/static/js/**" />
   <mvc:resources location="/static/dist/" mapping="/static/dist/**" />
@@ -18,7 +20,7 @@
   <!-- springMVC内容类型 -->
   <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager"/>
   
-  <!-- springMVC登录拦截器 -->
+  <!-- springMVC 登录拦截器 -->
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/**"/>
@@ -30,6 +32,7 @@
     </mvc:interceptor>
   </mvc:interceptors>
   
+  <!-- springMVC 视图解析器 -->
   <mvc:view-resolvers>
     <mvc:content-negotiation>
       <mvc:default-views>
@@ -46,14 +49,14 @@
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 	  <property name="mediaTypes">
 	    <value>
-	      html=text/html
 	      json=application/json
 	      xml=application/xml
+	      html=text/html
 	    </value>
 	  </property>
 	</bean>
   
-  <!--  -->
+  <!-- 客户端cookie超时时间 -->
   <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
     <property name="cookieName" value="clientlanguage"/>
     <!-- in seconds. If set to -1, the cookie is not persisted (deleted when browser shuts down) -->

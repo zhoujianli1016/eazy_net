@@ -1,12 +1,11 @@
 package com.sunstudio.aop;
 
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
+import java.util.Arrays;
 
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.aop.AfterReturningAdvice;
-import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.stereotype.Component;
 
 /**	执行时间日志AOP
@@ -14,29 +13,26 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class ExecutionTimeLoggerAOP implements MethodBeforeAdvice, AfterReturningAdvice {
+public class ExecutionTimeLoggerAOP implements MethodInterceptor {
 	
-	/**
-	 * log4j
-	 */
-	private Logger logger = LogManager.getLogger(this.getClass());
-	
-	/**
-	 * 开始时间
-	 */
-	private long beginTime = 0;
+	/** log4j */
+	private Logger LOGGER = LogManager.getLogger(this.getClass());
 	
 	@Override
-	public void afterReturning(Object arg0, Method arg1, Object[] arg2, Object arg3) throws Throwable {
-		long elapsedTime = System.nanoTime() - beginTime;
-		String className = arg3.getClass().getCanonicalName();
-		String methodName = arg1.getName();
-		logger.info("Execution of [ " + className + "#" + methodName + " ] ended in [ " + new BigDecimal(elapsedTime).divide(new BigDecimal(1000000)) + " ] milliseconds");
-	}
-
-	@Override
-	public void before(Method arg0, Object[] arg1, Object arg2) throws Throwable {
-		beginTime = System.nanoTime();
+	public Object invoke(MethodInvocation invocation) throws Throwable {
+		long beginTime = System.currentTimeMillis();
+		String className = invocation.getThis().getClass().getCanonicalName();
+		String methodName = invocation.getMethod().getName();
+		String args = Arrays.deepToString(invocation.getArguments());
+		try {
+			LOGGER.info("Execution of [ {}#{}({}) ] beginning", className, methodName, args);
+			Object obj = invocation.proceed();
+			return obj;
+		} catch (Throwable e) {
+			throw e;
+		} finally {
+			LOGGER.info("Execution of [ {}#{} ] ended in {} ms", className, methodName, System.currentTimeMillis() - beginTime);
+		}
 	}
 
 }
